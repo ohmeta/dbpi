@@ -104,10 +104,11 @@ rule kraken2_16S_gg_db_build:
         map = os.path.join(
             config["16S_gg"]["kk2_db"], "seqid2taxid.map")
     log:
-        "logs/kraken2_16S_gg_db.log"
+        os.path.join(config["16S_gg"]["kk2_db"],
+                     "kraken2_16S_gg_db.log")
     params:
         db_name = config["16S_gg"]["kk2_db"],
-        gg_version = config["16S_gg"]["gg_version"],
+        db_version = config["16S_gg"]["version"],
     threads:
         8
     run:
