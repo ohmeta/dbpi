@@ -96,7 +96,7 @@ rule kraken2_16S_gg_db_build:
             config["16S_gg"]["kk2_db"], "taxonomy/names.dmp"),
         map = os.path.join(
             config["16S_gg"]["kk2_db"], "seqid2taxid.map")
-   output:
+    output:
         k2d = expand(
             os.path.join(
                 config["16S_gg"]["kk2_db"], "{kk}.k2d"),
