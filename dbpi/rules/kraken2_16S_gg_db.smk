@@ -63,15 +63,16 @@ rule kraken2_16S_gg_db_preprocess:
                 config["16S_gg"]["kk2_db"], "seqid2taxid.map")
     params:
         db_dir = config["16S_gg"]["kk2_db"],
-        db_verison = config["16S_gg"]["version"],
+        db_version = config["16S_gg"]["version"],
         tax_tool = os.path.join(
-            os.path.dirname(shutil.which("kraken2-build")),
+            os.path.dirname(os.path.realpath(
+                shutil.which("kraken2-build"))),
             "build_gg_taxonomy.pl")
     run:
         shell(
             '''
             pushd {params.db_dir}
-            mkdir data library taxonomy
+            mkdir -p data library taxonomy
 
             pushd data
             gzip -dc {input.fna} > {params.db_version}.fasta
