@@ -10,7 +10,7 @@ shell.executable("bash")
 
 configfile: "config.yaml"
 
-include: "rules/kraken2.smk"
+include: "rules/kraken2_16S_gg_db.smk"
 
 rule all:
     input:
