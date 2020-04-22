@@ -1,6 +1,6 @@
 16S_gg:
   remote_dir: "ftp://greengenes.microbio.me/greengenes_release"
   local_dir: "/hwfssz1/pub/database/greengenes.microbio.me/greengenes_release"
-  version: "gg_13_55"
+  version: "gg_13_5"
   kk2_db: "16S_greengenes_kraken2_db"
   download_no_exists: True
