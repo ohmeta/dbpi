@@ -13,26 +13,30 @@ rule kraken2_16S_gg_db_download:
     params:
         local_dir = config["16S_gg"]["local_dir"],
         remote_dir = config["16S_gg"]["remote_dir"],
+        output_dir = os.path.join(
+            config["16S_gg"]["local_dir"],
+            config["16S_gg"]["version"]),
         db_version = config["16S_gg"]["version"],
         download_no_exists = config["16S_gg"]["download_no_exists"]
     run:
-        remote_fna = os.path.join(
+        fna = os.path.join(
             params.remote_dir,
             params.db_version + "/" +
             params.db_version + ".fasta.gz")
 
-        remote_taxonomy = os.path.join(
+        taxonomy = os.path.join(
             params.remote_dir,
             params.db_version + "/" +
             params.db_version + "_taxonomy.txt.gz")
 
         if params.download_no_exists:
-            shell('''rsync %s %s''' % (remote_fna, output.fna))
-            shell('''rsync %s %s''' % (remote_taxnomy, output.taxonomy))
+            shell('''mkdir -p {params.output_dir}''')
+            shell('''wget -P {params.output_dir} %s''' % fna)
+            shell('''wget -P {params.output_dir} %s''' % taxnomy)
         else:
-            print("Error:kraken2_16S_gg_db_download: {params.local_dir} unavaliable")
-            print('''rsync %s %s''' % (remote_fna, output.fna))
-            print('''rsync %s %s''' % (remote_taxnomy, output.taxonomy))
+            print("#Error:kraken2_16S_gg_db_download: {params.local_dir} unavaliable\n")
+            shell('''wget -P {params.output_dir} %s''' % fna)
+            shell('''wget -P {params.output_dir} %s''' % taxnomy)
             sys.exit(1)
 
        
