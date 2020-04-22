@@ -51,8 +51,8 @@ rule kraken2_16S_gg_db_preprocess:
             config["16S_gg"]["version"] + "/" +
             config["16S_gg"]["version"] + "_taxonomy.txt.gz")
     output:
-        data = os.path.join(
-                config["16S_gg"]["kk2_db"], "data"),
+        data = directory(os.path.join(
+                config["16S_gg"]["kk2_db"], "data")),
         library = os.path.join(
                 config["16S_gg"]["kk2_db"], "library/gg.fna"),
         nodes = os.path.join(
