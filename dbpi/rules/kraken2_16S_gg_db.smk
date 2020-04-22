@@ -102,12 +102,10 @@ rule kraken2_16S_gg_db_build:
         map = os.path.join(
             config["16S_gg"]["kk2_db"], "seqid2taxid.map")
     output:
-        k2d = expand(
+        expand(
             os.path.join(
                 config["16S_gg"]["kk2_db"], "{kk}.k2d"),
-            kk=["hash", "opts", "taxo"]),
-        map = os.path.join(
-            config["16S_gg"]["kk2_db"], "seqid2taxid.map")
+            kk=["hash", "opts", "taxo"])
     log:
         os.path.join(config["16S_gg"]["kk2_db"],
                      "kraken2_16S_gg_db.log")
